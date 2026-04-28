@@ -112,7 +112,7 @@ az group delete --name AZ900-VM-Lab --yes --no-wait
 
 ### Screenshot
 
-![Static Website Live]Screenshot 2026-04-28 103410.png
+![Static Website Live] <img width="1222" height="530" alt="Image" src="https://github.com/user-attachments/assets/311dee15-7caa-4fbb-95b5-f52bb5409288" />
 
 *My static website hosted on Azure Blob Storage*
 

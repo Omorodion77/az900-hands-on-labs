@@ -148,10 +148,86 @@ az group delete --name AZ900-VM-Lab --yes --no-wait
 ---
 
 ## Project 3: Budget & Monitoring Dashboard
+## Project 3: Budget & Monitoring Dashboard
 
-*Coming soon...*
+**Exam Domain:** Azure Governance, Cost Management, Monitoring (30-35% of exam)
 
----
+### What I Did
+
+- Created a Resource Group (`AZ900-Governance-Lab`) and deployed a Storage Account (`az900govlab1779304505`) with LRS redundancy in East US via Azure Cloud Shell
+- Set up a monthly budget (`AZ900-Monthly-Budget`) for $10 with alert thresholds at 50%, 80% (actual), and 100% (forecasted) scoped to my billing account
+- Explored Cost Analysis views — Accumulated costs, Cost by resource, Cost by service, and Daily costs
+- Navigated to Azure Advisor and reviewed all 5 recommendation categories — found 1 active Reliability recommendation: **Create an Azure Service Health alert** (High impact)
+- Set up Azure Monitor Metrics on the storage account, tracking **Transactions (Sum)** over a 24-hour window
+- Created an alert rule (`High-Transactions-Alert`) triggered when Transactions > 5, with an action group (`AZ900-Action-Group`) configured to send email notifications
+- Pinned the metrics chart to a new dashboard called `AZ900 Monitoring`
+- Browsed Azure Policy definitions (3,424 built-in policies) and explored the **Allowed locations** policy to understand how governance guardrails work
+- Applied a `CanNotDelete` resource lock (`PreventDeletion`) via CLI and confirmed it blocked deletion from the portal with an error
+- Added tags to the resource group (`Environment=Lab`, `Project=AZ900`, `Owner=Eromosele`) for cost allocation and organization
+- Removed the lock and deleted the resource group to preserve credits
+
+> **Note:** Azure for Students subscription scopes budgets at the billing account level rather than subscription level — this is broader coverage and still satisfies the same governance concept. Also discovered that Azure automatically provisions a `NetworkWatcher` resource in a `NetworkWatcherRG` resource group when networking resources are created — a real-world Azure behavior worth knowing.
+
+### Key Concepts Learned
+
+- **Azure Cost Management** — Analyze spend by resource, resource group, or service; set budgets with multi-threshold alerts to prevent overspending
+- **Azure Advisor** — Personalized best-practice recommendations across 5 pillars: Cost, Security, Reliability, Operational Excellence, and Performance
+- **Azure Service Health** — Three components: Azure Status (global outages), Service Health (issues affecting your subscription/region), and Resource Health (health of your specific resources)
+- **Azure Monitor** — Unified monitoring platform for all Azure resources; collects metrics and logs, enables alerts, dashboards, and action groups
+- **Alert Rules & Action Groups** — Alerts evaluate a condition on a schedule; action groups define *what happens* when the alert fires (email, SMS, webhook, etc.)
+- **Azure Policy** — Enforces governance rules at scale (e.g., restrict resource creation to specific regions); 3,400+ built-in policy definitions available
+- **Resource Tags** — Key-value metadata attached to resources for cost allocation, ownership tracking, and organization
+- **Resource Locks** — `CanNotDelete` prevents deletion even by admins; `ReadOnly` prevents any modifications; must be removed before cleanup
+
+### CLI Commands Used
+
+```bash
+# Create Resource Group
+az group create --name AZ900-Governance-Lab --location eastus
+
+# Create Storage Account
+az storage account create \
+  --name az900govlab1779304505 \
+  --resource-group AZ900-Governance-Lab \
+  --location eastus \
+  --sku Standard_LRS
+
+# Add tags to Resource Group
+az group update \
+  --name AZ900-Governance-Lab \
+  --tags Environment=Lab Project=AZ900 Owner=Eromosele
+
+# Create a CanNotDelete resource lock
+az lock create \
+  --name PreventDeletion \
+  --resource-group AZ900-Governance-Lab \
+  --lock-type CanNotDelete
+
+# Remove the lock (required before cleanup)
+az lock delete \
+  --name PreventDeletion \
+  --resource-group AZ900-Governance-Lab
+
+# Cleanup
+az group delete --name AZ900-Governance-Lab --yes --no-wait
+```
+
+### Resources Created
+
+| Resource | Type | Location |
+|----------|------|----------|
+| AZ900-Governance-Lab | Resource Group | East US |
+| az900govlab1779304505 | Storage Account (LRS) | East US |
+| AZ900-Monthly-Budget | Cost Management Budget | Billing Account |
+| High-Transactions-Alert | Monitor Alert Rule | East US |
+| AZ900-Action-Group | Monitor Action Group | East US |
+| AZ900 Monitoring | Azure Dashboard | — |
+
+### Cleanup
+
+✅ Removed `PreventDeletion` lock, then deleted resource group `AZ900-Governance-Lab` to preserve free credits.
+
+
 
 ## Project 4: Identity & Access Management
 

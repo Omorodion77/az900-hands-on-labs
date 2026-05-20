@@ -15,7 +15,7 @@
 |---|---------|-------------|--------|
 | 1 | [Deploy a VM & Web Server](#project-1-deploy-a-virtual-machine--web-server) | Compute, VNet, NSG | ✅ Complete |
 | 2 | [Static Website with Azure Storage](#project-2-static-website-with-azure-storage) | Blob Storage, Static Website | ✅ Complete |
-| 3 | [Budget & Monitoring Dashboard](#project-3-budget--monitoring-dashboard) | Cost Mgmt, Monitor, Policy | ⬜ Pending |
+| 3 | [Budget & Monitoring Dashboard](#project-3-budget--monitoring-dashboard) | Cost Mgmt, Monitor, Policy | ✅ Complete |
 | 4 | [Identity & Access Management](#project-4-identity--access-management) | Entra ID, RBAC, MFA | ⬜ Pending |
 | 5 | [SQL Database + App Service](#project-5-sql-database--app-service) | PaaS, SQL, App Service | ⬜ Pending |
 | 6 | [ARM Templates (IaC)](#project-6-arm-templates-iac) | ARM, Bicep, CLI | ⬜ Pending |

@@ -202,6 +202,7 @@ az lock create \
   --name PreventDeletion \
   --resource-group AZ900-Governance-Lab \
   --lock-type CanNotDelete
+<img width="733" height="238" alt="Image" src="https://github.com/user-attachments/assets/3cd7a0aa-c468-4caa-ae27-5a242ddaea14" />
 
 # Remove the lock (required before cleanup)
 az lock delete \

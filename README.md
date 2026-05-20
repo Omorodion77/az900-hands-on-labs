@@ -192,19 +192,29 @@ az storage account create \
   --location eastus \
   --sku Standard_LRS
 
-# Add tags to Resource Group
-az group update \
-  --name AZ900-Governance-Lab \
-  --tags Environment=Lab Project=AZ900 Owner=Eromosele
-
 # Create a CanNotDelete resource lock
 az lock create \
   --name PreventDeletion \
   --resource-group AZ900-Governance-Lab \
   --lock-type CanNotDelete
+
+# Remove the lock (required before cleanup)
+az lock delete \
+  --name PreventDeletion \
+  --resource-group AZ900-Governance-Lab
+
+````
+
 ### Screenshot
 
 <img width="733" height="238" alt="Resource Lock Blocking Deletion" src="https://github.com/user-attachments/assets/3cd7a0aa-c468-4caa-ae27-5a242ddaea14" />
+
+*Azure CanNotDelete resource lock blocking deletion of AZ900-Governance-Lab from the portal*
+
+### Key Concepts Learned
+````
+
+The key fix: make sure the triple backtick ` ``` ` closing the code block comes **before** `### Screenshot`, not after it.
 
 *Azure CanNotDelete resource lock blocking deletion of AZ900-Governance-Lab from the portal*
 
